@@ -1,0 +1,6 @@
+{
+  "name": "BGI Community Management System",
+  "description": "An internal administrative management portal for BGI Community members to handle authentication, role management, interactive statistics, events, rich notifications, communication channels, task tracking, directories, resources, and finances.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

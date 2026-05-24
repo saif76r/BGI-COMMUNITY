@@ -300,7 +300,7 @@ const filteredChats = chats.filter(
         <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden grid grid-cols-1 md:grid-cols-4 h-[580px]">
 
           {/* SIDEBAR */}
-          <div className="p-4 bg-slate-950/80 border-r border-slate-800 space-y-5 hidden md:block">
+          <div className="p-4 bg-slate-950/80 border-r border-slate-800 space-y-5">
 
             {/* GENERAL */}
             <div className="space-y-2">

@@ -74,16 +74,31 @@ export default function MemberManagementView({
     'Emergency Department'
   ];
   // Filtered list
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          user.memberId.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDept = selectedDept === 'All' || user.department === selectedDept;
-    const matchesStatus = selectedStatus === 'All' || user.status === selectedStatus;
-    
-    return matchesSearch && matchesDept && matchesStatus;
-  });
+const filteredUsers = users.filter(user => {
 
+  // Admin & Moderator can see all users
+  if (
+    currentUser.role !== 'Admin' &&
+    currentUser.role !== 'Moderator'
+  ) {
+    if (user.department !== currentUser.department) {
+      return false;
+    }
+  }
+
+  const matchesSearch =
+    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.memberId.toLowerCase().includes(searchQuery.toLowerCase());
+
+  const matchesDept =
+    selectedDept === 'All' || user.department === selectedDept;
+
+  const matchesStatus =
+    selectedStatus === 'All' || user.status === selectedStatus;
+
+  return matchesSearch && matchesDept && matchesStatus;
+});
   const handleAddNewMemberSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newName || !newEmail || !newPhone) return;

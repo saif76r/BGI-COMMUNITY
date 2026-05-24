@@ -127,20 +127,21 @@ export default function CommunicationView({
   // =========================
 
   useEffect(() => {
-    if (!allowedChannels.includes(activeChannel)) {
-      setActiveChannel('#general');
-    }
-  }, [activeChannel, allowedChannels]);
+  if (
+    activeChannel !== '#general' &&
+    !allowedChannels.includes(activeChannel)
+  ) {
+    setActiveChannel('#general');
+  }
+}, [activeChannel, allowedChannels]);
 
   // =========================
   // FILTERED CHATS
   // =========================
 
-  const filteredChats = chats.filter(
-    c =>
-      c.channelId === activeChannel &&
-      allowedChannels.includes(c.channelId)
-  );
+const filteredChats = chats.filter(
+  c => c.channelId === activeChannel
+);
 
   // =========================
   // SEND MESSAGE

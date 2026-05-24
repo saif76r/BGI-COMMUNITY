@@ -67,39 +67,7 @@ export default function CommunicationView({
     setTypedMessage('');
 
     // Launch chatbot replica to provide simulated responses and community feedback
-    setTimeout(() => {
-      let botText = "Got it! Thanks for reaching out. The operations committee will record this thread.";
-      let responderName = "BGI Assistant Bot";
-      let responderRole: UserRole = "Moderator";
-
-      if (activeChannel === '#general') {
-        const phrases = [
-          "Super interesting perspective, thanks for bringing it up!",
-          "Yes! We've noted that. Let's discuss this at the upcoming assembly.",
-          "Absolutely agree with that point! Looking forward to Q3 updates.",
-          "That is definitely on our roadmap. Be sure to register for the workshop!"
-        ];
-        botText = phrases[Math.floor(Math.random() * phrases.length)];
-        responderName = "Sarah Rahman";
-        responderRole = "Moderator";
-      } else if (activeChannel === '#admins') {
-        botText = "Acknowledged. Let’s double check validation indices for this batch before final approval logs.";
-        responderName = "Administrator Chief";
-        responderRole = "Admin";
-      }
-
-      const replyMsg: ChatMessage = {
-        id: `chat-${Math.random().toString()}`,
-        channelId: activeChannel,
-        senderId: 'sys-bot',
-        senderName: responderName,
-        senderRole: responderRole,
-        content: botText,
-        timestamp: new Date().toISOString()
-      };
-      
-      onSendChatMessage(replyMsg);
-    }, 1200);
+   
   };
 
   const handleCreateForumSubmit = (e: React.FormEvent) => {

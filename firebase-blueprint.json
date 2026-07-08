@@ -1,0 +1,133 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "BGI Community Member User model.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The custom identifier for a user" },
+        "name": { "type": "string", "description": "Name of the BGI member" },
+        "email": { "type": "string", "description": "Registered credentials email" },
+        "role": { "type": "string", "description": "Role classification: Admin, Moderator, or Member", "enum": ["Admin", "Moderator", "Member"] },
+        "department": { "type": "string", "description": "The group department the member belongs to" },
+        "batch": { "type": "string", "description": "Batch class of the member" },
+        "phone": { "type": "string", "description": "Mobile contact number" },
+        "memberId": { "type": "string", "description": "The system generated BGI certificate id" },
+        "status": { "type": "string", "description": "Membership status state: Active, Inactive, or Pending", "enum": ["Active", "Inactive", "Pending"] },
+        "joinDate": { "type": "string" },
+        "verified": { "type": "boolean" },
+        "avatar": { "type": "string" },
+        "position": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role", "status"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Official administrative notices and news announcements.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "publishedBy": { "type": "string" },
+        "publisherRole": { "type": "string" },
+        "date": { "type": "string" },
+        "pinned": { "type": "boolean" },
+        "category": { "type": "string" }
+      },
+      "required": ["id", "title", "content", "publishedBy", "date"]
+    },
+    "Event": {
+      "title": "Event",
+      "description": "BGI workshops, exhibitions, and general assembly seminars.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "location": { "type": "string" },
+        "organizer": { "type": "string" },
+        "capacity": { "type": "integer" },
+        "category": { "type": "string" }
+      },
+      "required": ["id", "title", "date", "time"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time chat messaging stream for channel hubs.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "channelId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderRole": { "type": "string" },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "channelId", "senderId", "content", "timestamp"]
+    },
+    "DiscussionThread": {
+      "title": "DiscussionThread",
+      "description": "Interactive forum and brainstorming sessions.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "content": { "type": "string" },
+        "commentsCount": { "type": "integer" },
+        "date": { "type": "string" },
+        "category": { "type": "string" }
+      },
+      "required": ["id", "title", "authorId", "content", "date"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Department assignment tasks with submissions and kanban progress.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string" },
+        "priority": { "type": "string" },
+        "assignee": { "type": "string" },
+        "department": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "progress": { "type": "integer" }
+      },
+      "required": ["id", "title", "status", "priority", "department"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Registry profile information for BGI community members"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Broad announcements pinnable on dashboard cards"
+    },
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "Interactive workshops and meetings tracking attendees"
+    },
+    "/chats/{chatId}": {
+      "schema": "ChatMessage",
+      "description": "Real-time communication and messaging collection"
+    },
+    "/discussions/{discussionId}": {
+      "schema": "DiscussionThread",
+      "description": "Thread list items for member forum posts"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Kanban workspace action logs and milestones"
+    }
+  }
+}
